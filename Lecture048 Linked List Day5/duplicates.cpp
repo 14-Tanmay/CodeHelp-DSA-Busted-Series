@@ -41,3 +41,29 @@ Node * uniqueSortedList(Node * head) {
     
     return head; 
 }
+
+//Remove duplicates from unsorted LL
+Node* removeDuplicates(Node* head) {
+    if (head == NULL)
+         return NULL;
+
+    unordered_set<int> visited;
+    Node* prev = NULL;
+    Node* curr = head;
+
+    while (curr != NULL) {
+        if (visited.find(curr->data) != visited.end()) {
+            Node* next_node = curr->next;
+            delete curr;
+            prev->next = next_node;
+            curr = next_node;
+        } 
+        else {
+            visited.insert(curr->data);
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+
+    return head;
+}
